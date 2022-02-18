@@ -7,12 +7,15 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./counter-output.component.css']
 })
 export class CounterOutputComponent implements OnInit {
+  
+  counter: number | undefined;
 
-  @Input() counter: any;
+  constructor(private store: Store<{counter: { counter: number }}>) { }
 
-  constructor() { }
-
-  ngOnInit(){
+  ngOnInit(): void {
+    this.store.select('counter').subscribe((data) => {
+      this.counter = data.counter;
+    })
   }
 
 }
